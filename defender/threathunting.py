@@ -1,7 +1,7 @@
 import os
 import time
 import json
-# import csv
+import csv
 # import requests
 import urllib.request
 import urllib.parse
@@ -69,34 +69,34 @@ downloads_folder = os.path.join(home_directory, "Downloads")
 if not os.path.exists(downloads_folder):
     os.makedirs(downloads_folder)
 current_date = time.strftime("%Y%m%d")
-filename = f"defender_log_{current_date}.txt"
-file_path = os.path.join(downloads_folder, filename)
+filenametxt = f"defender_log_{current_date}.txt"
+filenamecsv = f"defender_log_{current_date}.csv"
+file_path_txt = os.path.join(downloads_folder, filenametxt)
+file_path_csv = os.path.join(downloads_folder, filenamecsv)
 
-'''
+
 # write to csv file
-outputFile = open(file_path, 'w')
+print("writing output to csv file......")
+outputFile = open(file_path_csv, 'w')
 output = csv.writer(outputFile)
 output.writerow(results[0].keys())
 for result in results:
     output.writerow(result.values())
-
 outputFile.close()
 
-'''
 
 # write output to text file
-with open(file_path, "w", encoding="utf-8") as output_file:
+print("writing output to txt file......")
+with open(file_path_txt, "w", encoding="utf-8") as output_file:
     for result in results:
-        # Convert each result to a JSON string and write it to the file
         result_json = json.dumps(result, ensure_ascii=False)
         output_file.write(result_json + "\n")
 output_file.close()
-
 time.sleep(1)
 
 # upload logs to Sumologic
 print("uploading data to sumologic......")
-cmd = 'curl -v -X POST -H "X-Sumo-Category:security/defender/hunting" -H "X-Sumo-Name:%s" -T %s %s --ssl-no-revoke' %(file_path, file_path, sumourl)
+cmd = 'curl -v -X POST -H "X-Sumo-Category:security/defender/hunting" -H "X-Sumo-Name:%s" -T %s %s --ssl-no-revoke' %(file_path_txt, file_path_txt, sumourl)
 # print(cmd)
 returned_value = os.system(cmd)
 # print('returned value:', returned_value)
