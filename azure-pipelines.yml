@@ -14,6 +14,11 @@ trigger:
     exclude:
     - defender/readme.md
 
+variables:
+  # Azure service connection established during pipeline creation
+  azureSubscription: <Name of your Azure subscription>
+  appName: <Name of the function app>
+
 pool:
   vmImage: ubuntu-latest
 steps:
