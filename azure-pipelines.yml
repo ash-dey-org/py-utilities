@@ -7,7 +7,7 @@
 trigger:
   branches:
     include:
-    - main
+    - main_do_not_use
   paths:
     include:
     - defender
