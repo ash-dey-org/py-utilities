@@ -21,8 +21,8 @@ git clone https://github.com/ash-dey-org/py-utilities.git
 ```
 Requires 3 environment variables to be defined before running the script
 ```
-export GITHUB_USER=""
-export GITHUB_TOKEN=
-export GITHUB_ORG=""
+export GITHUB_USER="
+export GITHUB_TOKEN="
+export GITHUB_ORG="
 
 
